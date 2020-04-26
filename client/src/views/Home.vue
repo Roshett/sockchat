@@ -72,7 +72,7 @@ export default {
 
   methods: {
     sendHandler() {
-      io.emit('send', this.message);
+      this.socket.emit('send', this.message);
     },
 
     openNotification() {
