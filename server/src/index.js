@@ -34,6 +34,8 @@ const ioApp = ioLib(server)
 const app = express();
 const server = http.createServer(app);
 
+let messages = []
+
 ioApp.listen(server)
 
 ioApp.on('connection', (socket) => {
@@ -41,6 +43,10 @@ ioApp.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+  socket.on('send', data => {
+    messages.push(data)
+    socket.emit(data)
+  })
 });
 
 server.listen(3000);
