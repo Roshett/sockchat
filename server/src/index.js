@@ -1,23 +1,39 @@
-import express from 'express'
-import http from 'http'
-const app = express()
-const server = http.createServer(app);
-import io from 'socket.io'
-const ioApp = io(server)
-import cors from 'cors';
+// import express from 'express'
+// import http from 'http'
+// const app = express()
+// const server = http.createServer(app);
+// import io from 'socket.io'
+// const ioApp = io(server)
+// const cors = require('cors')
 
-app.use(cors())
+// app.use(cors({
+//   origin: true,
+//   credentials: true
+// }))
 
-app.get('/', (req, res) => {
-  res.send('hello world!')
-})
+// app.get('/', (req, res) => {
+//   res.send('hello world!')
+// })
 
-ioApp.on('connection', (socket) => {
+// ioApp.on('connection', (socket) => {
+//   console.log('connect');
+//   socket.emit('news', { hello: 'world' });
+//   socket.on('my other event', (data) => {
+//     console.log(data);
+//   });
+// });
+
+// app.listen(3000, () => console.log('app start'))
+
+
+var express = require('express'),
+    http = require('http');
+var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+io.on('connection', (socket) => {
   console.log('connect');
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', (data) => {
-    console.log(data);
-  });
 });
 
-app.listen(3000, () => console.log('app start'))
+server.listen(3000);
