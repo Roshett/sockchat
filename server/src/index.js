@@ -37,7 +37,10 @@ const server = http.createServer(app);
 ioApp.listen(server)
 
 ioApp.on('connection', (socket) => {
-  console.log('connect');
+  socket.broadcast.emit('hi');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
 });
 
 server.listen(3000);

@@ -7,9 +7,7 @@
     </div>
     <div class="controls">
       <vs-input class="input" v-model="message" placeholder="Message" />
-      <vs-button class="button" gradient @click="sendHandler"
-        >Send</vs-button
-      >
+      <vs-button class="button" gradient @click="sendHandler">Send</vs-button>
     </div>
   </div>
 </template>
@@ -60,7 +58,11 @@ export default {
   },
 
   mounted() {
-    const socket = io('http://localhost:3000/', { origins: "*" });
+    const socket = io("http://localhost:3000/", { origins: "*" });
+
+    socket.on("hi", (msg) => {
+      this.openNotification()
+    });
   },
 
   methods: {
@@ -70,11 +72,11 @@ export default {
 
     openNotification() {
       this.$vs.notification({
-        position: 'top-center',
+        position: "top-center",
         title: `Какой то уебан зашел в чат`,
         text: `Вроде четко в хату зашел, норм пацан`,
       });
-    },// ты пидор
+    }, // ты пидор
   },
 };
 </script>
