@@ -54,20 +54,25 @@ export default {
         { message: "azazazaaz1" },
       ],
       message: "",
+      socket: null,
     };
   },
 
-  mounted() {
-    const socket = io("http://localhost:3000/", { origins: "*" });
+  created() {
+    this.socket = io("http://localhost:3000/", { origins: "*" });
 
     socket.on("hi", (msg) => {
       this.openNotification()
+    });
+
+    socket.on("sendMessage", (data) => {
+      console.log(data)
     });
   },
 
   methods: {
     sendHandler() {
-      console.log("Send!");
+      io.emit('send', this.message);
     },
 
     openNotification() {
