@@ -28,13 +28,15 @@
 
 import express from 'express'
 import http from 'http'
-import io from 'socket.io'
+import ioLib from 'socket.io'
 
+const ioApp = ioLib(server)
 const app = express();
 const server = http.createServer(app);
-io.listen(server)
 
-io.on('connection', (socket) => {
+ioApp.listen(server)
+
+ioApp.on('connection', (socket) => {
   console.log('connect');
 });
 
