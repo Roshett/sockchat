@@ -44,7 +44,8 @@ ioApp.on('connection', (socket) => {
   socket.on('send', data => {
     console.log(data)
     messages.push({message: data})
-    socket.emit('sendMessage', messages);
+    console.log(messages)
+    ioApp.emit('sendMessage', messages);
   })
 
   socket.on('disconnect', () => {
