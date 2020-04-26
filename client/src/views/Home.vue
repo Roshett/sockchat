@@ -61,11 +61,11 @@ export default {
   created() {
     this.socket = io("http://localhost:3000/", { origins: "*" });
 
-    socket.on("hi", (msg) => {
+    this.socket.on("hi", (msg) => {
       this.openNotification()
     });
 
-    socket.on("sendMessage", (data) => {
+    this.socket.on("sendMessage", (data) => {
       console.log(data)
     });
   },
