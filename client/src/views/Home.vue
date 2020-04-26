@@ -19,60 +19,28 @@ export default {
   name: "Home",
   data() {
     return {
-      messages: [
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz" },
-        { message: "azazazaaz1" },
-      ],
+      messages: [],
       message: "",
       socket: null,
     };
   },
 
   created() {
-    this.socket = io("http://localhost:3000/", { origins: "*" });
+    this.socket = io("http://localhost:3000/");
 
     this.socket.on("hi", (msg) => {
       this.openNotification()
     });
 
     this.socket.on("sendMessage", (data) => {
-      console.log(data)
+      this.messages = data
     });
   },
 
   methods: {
     sendHandler() {
       this.socket.emit('send', this.message);
+      this.message = '';
     },
 
     openNotification() {
@@ -81,7 +49,7 @@ export default {
         title: `Какой то уебан зашел в чат`,
         text: `Вроде четко в хату зашел, норм пацан`,
       });
-    }, // ты пидор
+    },
   },
 };
 </script>
