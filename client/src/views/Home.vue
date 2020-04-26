@@ -60,7 +60,7 @@ export default {
   },
 
   mounted() {
-    const socket = io('http://localhost');
+    const socket = io('http://localhost:3000/', { origins: "*" });
   },
 
   methods: {
@@ -74,7 +74,7 @@ export default {
         title: `Какой то уебан зашел в чат`,
         text: `Вроде четко в хату зашел, норм пацан`,
       });
-    },
+    },// ты пидор
   },
 };
 </script>
