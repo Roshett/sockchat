@@ -1,13 +1,15 @@
 import express from 'express'
-import io from 'socket.io'
-
+import http from 'http'
 const app = express()
+const server = http.createServer(app);
+import io from 'socket.io'
+const ioApp = io(server)
 
 app.get('/', (req, res) => {
   res.send('hello world!')
 })
 
-io.on('connection', (socket) => {
+ioApp.on('connection', (socket) => {
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', (data) => {
     console.log(data);
