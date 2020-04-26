@@ -39,14 +39,17 @@ let messages = []
 ioApp.listen(server)
 
 ioApp.on('connection', (socket) => {
-  socket.broadcast.emit('hi');
+  socket.broadcast.emit('sendMessage', messages);
+
+  socket.on('send', data => {
+    console.log(data)
+    messages.push({message: data})
+    socket.emit('sendMessage', messages);
+  })
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-  socket.on('send', data => {
-    messages.push(data)
-    socket.emit(data)
-  })
 });
 
 server.listen(3000);
