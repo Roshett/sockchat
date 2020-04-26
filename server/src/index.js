@@ -26,11 +26,13 @@
 // app.listen(3000, () => console.log('app start'))
 
 
-var express = require('express'),
-    http = require('http');
-var app = express();
-var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+import express from 'express'
+import http from 'http'
+import io from 'socket.io'
+
+const app = express();
+const server = http.createServer(app);
+io.listen(server)
 
 io.on('connection', (socket) => {
   console.log('connect');
