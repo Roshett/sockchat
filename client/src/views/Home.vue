@@ -1,59 +1,79 @@
 <template>
   <div class="home">
     <div class="messages">
-      <p v-for="(message, index) in messages" :key="`message=key-${index}`">{{ message.message }}</p>
+      <p v-for="(message, index) in messages" :key="`message=key-${index}`">
+        {{ message.message }}
+      </p>
     </div>
     <div class="controls">
-      <vs-input class="input" v-model="value" placeholder="Message" />
-      <vs-button class="button" gradient>Send</vs-button>
+      <vs-input class="input" v-model="message" placeholder="Message" />
+      <vs-button class="button" gradient @click="sendHandler"
+        >Send</vs-button
+      >
     </div>
   </div>
 </template>
 
 <script>
+import io from "socket.io-client";
+
 export default {
   name: "Home",
   data() {
     return {
       messages: [
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz"},
-        {message: "azazazaaz1"},
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz" },
+        { message: "azazazaaz1" },
       ],
+      message: "",
     };
   },
+
+  mounted() {
+    const socket = io('http://localhost');
+  },
+
   methods: {
     sendHandler() {
       console.log("Send!");
+    },
+
+    openNotification() {
+      this.$vs.notification({
+        position: 'top-center',
+        title: `Какой то уебан зашел в чат`,
+        text: `Вроде четко в хату зашел, норм пацан`,
+      });
     },
   },
 };
