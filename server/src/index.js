@@ -40,13 +40,13 @@ ioApp.listen(server)
 
 ioApp.on('connection', (socket) => {
   socket.broadcast.emit('hi');
+  socket.on('send', data => {
+    messages.push(data)
+    socket.emit('sendMessage', data)
+  })
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-  socket.on('send', data => {
-    messages.push(data)
-    socket.emit(data)
-  })
 });
 
 server.listen(3000);
